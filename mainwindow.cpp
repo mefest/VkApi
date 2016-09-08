@@ -33,6 +33,9 @@ void MainWindow::urlChange(QUrl url)
 
     if(token != ""){
         vkApi->setToken(token);
+        QList<int> s;
+        s.append(1);
+        vkApi->getUsers(s);
         User *user = new User(vkApi, 0, this);
     }
 }

@@ -38,9 +38,19 @@ QUrl VkApi::getAuthUrl()
  QList<User *> *VkApi::getUsers(QList<int> &ids)
  {
      QList<User *>  *result = new QList<User *>;
-     for(int &id : ids){
-         result->append(new User(this,id));
-     }
+
+     QVariantMap args;
+     args["fields"] = "photo_50,city,verified";
+     args["name_case"] = "Nom";
+
+     QNetworkReply* reply = this->request("users.get", args);
+     connect(reply, &QNetworkReply::finished, [reply](){
+         //парсинг ответа
+         qDebug()<<reply->readAll();
+//         result->append(new User(this,"json"));
+         reply->deleteLater();
+     });
+
      return result;
  }
 
