@@ -18,6 +18,13 @@ User::User(VkApi *api, int id, QObject *parent) : AbstractEntity(api, id,parent)
     connect(reply, &QNetworkReply::finished, this, &User::onUpdate);
 }
 
+User::User(VkApi *api, QJsonObject user, QObject *parent ): AbstractEntity(api, 0,parent)
+{
+    firstName = user.value("first_name").toString();
+    lastName = user.value("last_name").toString();
+    qDebug()<<firstName<<lastName;
+}
+
 
 void User::onUpdate()
 {

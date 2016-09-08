@@ -9,7 +9,7 @@ class User : public AbstractEntity
 
 public:
     explicit User(VkApi* api, int id = 0, QObject *parent = 0);
-
+    explicit User(VkApi* api, QJsonObject user, QObject *parent = 0);
 
 
     QString getFirstName() { return firstName; }

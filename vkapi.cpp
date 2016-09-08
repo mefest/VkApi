@@ -32,8 +32,17 @@ QUrl VkApi::getAuthUrl()
 
  User* VkApi::getOwner()
 {
-    return new User(this);
-}
+     return new User(this);
+ }
+
+ QList<User *> *VkApi::getUsers(QList<int> &ids)
+ {
+     QList<User *>  *result = new QList<User *>;
+     for(int &id : ids){
+         result->append(new User(this,id));
+     }
+     return result;
+ }
 
 void VkApi::request(QUrl req)
 {
